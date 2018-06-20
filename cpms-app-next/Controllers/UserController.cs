@@ -15,7 +15,7 @@ namespace cpms_app_next.Controllers
         {
             this.users = new List<AppUser>();
             this.users.Add(new AppUser { Id = 1, Name = "Jitendra Prajapati", UserID = "prajapatijv", Password = "test0000", Role = "Admin" });
-            this.users.Add(new AppUser { Id = 2, Name = "Sandip Shah", UserID = "shahs", Password = "test0001", Role = "Admin" });
+            this.users.Add(new AppUser { Id = 2, Name = "Sandip Shah", UserID = "shahsandip", Password = "test0001", Role = "Admin" });
             this.users.Add(new AppUser { Id = 3, Name = "Manish Kevangi", UserID = "manish", Password = "test0002", Role = "Operator" });
         }
 

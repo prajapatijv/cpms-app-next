@@ -10,7 +10,6 @@ export const actionCreators = {
         const url = `api/user/getUsers`;
         const response = await fetch(url);
         const users = await response.json();
-
         dispatch({ type: receiveUsers, users });
     }
 };
