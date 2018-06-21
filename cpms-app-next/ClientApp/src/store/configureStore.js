@@ -8,8 +8,8 @@ import * as UserStore from './UserStore';
 export default function configureStore(history, initialState) {
   const reducers = {
     counter: Counter.reducer,
-      weatherForecasts: WeatherForecasts.reducer,
-      userStore: UserStore.reducer
+    weatherForecasts: WeatherForecasts.reducer,
+    userStore: UserStore.reducer
   };
 
   const middleware = [

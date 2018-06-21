@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { actionCreators } from '../../store/UserStore';
 
-class Users extends Component {
+class UserComponent extends Component {
     componentWillMount() {
         // This method runs when the component is first added to the page
+        //debugger
         this.props.requestUsers();
     }
 
@@ -16,7 +17,6 @@ class Users extends Component {
     }
 
     render() {
-        debugger
         return (
             <div>
                 <h1>Manage User</h1>
@@ -28,6 +28,6 @@ class Users extends Component {
 }
 
 export default connect(
-    state => state.weatherForecasts,
+    state => state.users,
     dispatch => bindActionCreators(actionCreators, dispatch)
-)(Users);
+)(UserComponent);

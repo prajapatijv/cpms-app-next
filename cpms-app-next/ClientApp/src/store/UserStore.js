@@ -1,30 +1,31 @@
-﻿const requestUsers = 'REQUEST_USERS';
-const receiveUsers = 'RECEIVE_USERS';
+﻿const requestUsersType = 'REQUEST_USERS';
+const receiveUsersType = 'RECEIVE_USERS';
 const initialState = { users: [], isLoading: false };
 
 export const actionCreators = {
     requestUsers: () => async (dispatch, getState) => {
-
-        dispatch({ type: requestUsers });
+        dispatch({ type: requestUsersType });
 
         const url = `api/user/getUsers`;
         const response = await fetch(url);
         const users = await response.json();
-        dispatch({ type: receiveUsers, users });
+
+        dispatch({ type: receiveUsersType, users });
     }
 };
 
 export const reducer = (state, action) => {
     state = state || initialState;
 
-    if (action.type === requestUsers) {
+    if (action.type === requestUsersType) {
         return {
             ...state,
             isLoading: true
         };
     }
 
-    if (action.type === receiveUsers) {
+
+    if (action.type === receiveUsersType) {
         return {
             ...state,
             users: action.users,
