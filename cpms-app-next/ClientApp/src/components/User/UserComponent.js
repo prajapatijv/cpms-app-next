@@ -16,21 +16,34 @@ class UserComponent extends Component {
 
     render() {
         return (
-            <div>
+            <div className="row">
                 <h1>Manage User</h1>
-                {renderUsers(this.props)}
-                <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
+                <div className="col-md-12">
+                    <h4 className="d-flex justify-content-between align-items-center mb-12">
+                        <span className="text-muted">+</span>
+                        <span className="badge badge-secondary badge-pill">{this.props.users.length}</span>
+                    </h4>
+                    <ul className="list-group mb-3">
+                        <Users users={this.props.users} />
+                    </ul>
+                </div>
             </div>
         );
     }
 }
 
-function renderUsers(props) {
+const Users = ({ users }) => {
     return (
-        <h1>
-            {props.users.length}
-        </h1>    
-        );
+        users.map(user => 
+            <li className="list-group-item">
+                <div>
+                    <h6 className="my-0">{user.firstName} {user.lastName}</h6>
+                    <small className="text-muted">@{user.userName}</small>
+                </div>
+                <span className="text-muted">{user.role}</span>
+            </li>
+        )
+    );
 }
     
 export default connect(

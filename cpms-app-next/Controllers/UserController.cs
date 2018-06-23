@@ -14,9 +14,9 @@ namespace cpms_app_next.Controllers
         public UserController()
         {
             this.users = new List<AppUser>();
-            this.users.Add(new AppUser { Id = 1, Name = "Jitendra Prajapati", UserID = "prajapatijv", Password = "test0000", Role = "Admin" });
-            this.users.Add(new AppUser { Id = 2, Name = "Sandip Shah", UserID = "shahsandip", Password = "test0001", Role = "Admin" });
-            this.users.Add(new AppUser { Id = 3, Name = "Manish Kevangi", UserID = "manish", Password = "test0002", Role = "Operator" });
+            this.users.Add(new AppUser { Id = 1, FirstName = "Jitendra", LastName = "Prajapati", UserName = "prajapatijv", Password = "test0000", Role = "Admin" });
+            this.users.Add(new AppUser { Id = 2, FirstName = "Sandip", LastName = "Shah", UserName = "shahsandip", Password = "test0001", Role = "Admin" });
+            this.users.Add(new AppUser { Id = 3, FirstName = "Manish", LastName = "Mistry", UserName = "manish", Password = "test0002", Role = "Operator" });
         }
 
         [HttpGet("[action]")]
@@ -28,8 +28,9 @@ namespace cpms_app_next.Controllers
         public class AppUser
         {
             public int Id { get; set; }
-            public string Name { get; set; }
-            public string UserID { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string UserName { get; set; }
             public string Password { get; set; }
             public string Role { get; set; }
         }
