@@ -6,13 +6,14 @@ export const actionCreators = {
     requestUsers: () => async (dispatch, getState) => {
         dispatch({ type: requestUsersType });
 
-        const url = `api/user/getUsers`;
+        const url = `api/user/getusers`;
         const response = await fetch(url);
         const users = await response.json();
 
         dispatch({ type: receiveUsersType, users });
     }
 };
+
 
 export const reducer = (state, action) => {
     state = state || initialState;
@@ -23,7 +24,6 @@ export const reducer = (state, action) => {
             isLoading: true
         };
     }
-
 
     if (action.type === receiveUsersType) {
         return {

@@ -6,8 +6,6 @@ import { actionCreators } from '../../store/UserStore';
 
 class UserComponent extends Component {
     componentWillMount() {
-        // This method runs when the component is first added to the page
-        //debugger
         this.props.requestUsers();
     }
 
@@ -20,13 +18,21 @@ class UserComponent extends Component {
         return (
             <div>
                 <h1>Manage User</h1>
-                {this.props.users}
+                {renderUsers(this.props)}
                 <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
             </div>
         );
     }
 }
 
+function renderUsers(props) {
+    return (
+        <h1>
+            {props.users.length}
+        </h1>    
+        );
+}
+    
 export default connect(
     state => state.users,
     dispatch => bindActionCreators(actionCreators, dispatch)

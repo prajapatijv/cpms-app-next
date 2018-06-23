@@ -4,7 +4,7 @@ import Layout from './components/Layout';
 import Home from './components/Home';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
-import UserComponent from './components/User/UserComponent'
+import UserComponent from './components/User/UserComponent';
 
 export default () => (
   <Layout>
