@@ -20,7 +20,7 @@ export default props => (
         </header>
     <div className="container-fluid">
         <div className="row">
-            <nav class="col-md-3 navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="col-md-2 navbar navbar-expand-lg navbar-light bg-light">
                 <NavMenu />
             </nav>
             <main className="col-md-9">
