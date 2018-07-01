@@ -9,6 +9,11 @@ main {
     margin: 20px;
 }
 
+button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 .site-header {
     background-color: rgba(0, 0, 0, .85);
     -webkit-backdrop-filter: saturate(180%) blur(20px);

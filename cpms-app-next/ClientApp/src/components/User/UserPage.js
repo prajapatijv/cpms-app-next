@@ -28,21 +28,21 @@ class UserPage extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            <ListUsers users={this.props.users} />
+                            <ListUsers users={this.props.users} selectUser={this.props.selectUser} />
                         </tbody>
                     </table>
                 </div>
-                <UserForm user={this.props.users[0]} />
+                <UserForm user={this.props.user} />
             </div> 
         );
     }
 }
 
-const ListUsers = ({ users }) => {
+const ListUsers = ({ users, selectUser }) => {
     return (
         users.map(user =>
-            <tr key={user.id} >
-                <td>{user.firstName}  {user.lastName} </td>
+            <tr key={user.id} onClick={selectUser} >
+                <td>{user.fullName} </td>
                 <td>{user.userName} </td>
             </tr>
         )
@@ -94,8 +94,8 @@ const UserForm = ({ user }) => {
                     </div>
                 </div>
                 <div className="row  float-right">
-                    <button className="btn btn-primary" type="button">Cancel</button>
-                    <button className="btn btn-primary" type="submit">Save</button>
+                    <button className="btn btn-outline-primary" type="button">Cancel</button>
+                    <button className="btn btn-outline-primary" type="submit">Save</button>
                 </div>
             </form>
         </div>
