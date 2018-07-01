@@ -1,7 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { actionCreators } from '../../store/UserStore';
 
 class UserPage extends Component {
@@ -19,19 +18,22 @@ class UserPage extends Component {
     render() {
         return (
             <div className="row">
-                <h2>Manage Users</h2>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">UserName</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ListUsers users={this.props.users} />
-                    </tbody>
-                </table>
-            </div>
+                <div className="col-md-6 order-md-1">
+                    <h2>Manage Users</h2>
+                    <table className="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">UserName</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ListUsers users={this.props.users} />
+                        </tbody>
+                    </table>
+                </div>
+                <UserForm user={this.props.users[0]} />
+            </div> 
         );
     }
 }
@@ -39,7 +41,7 @@ class UserPage extends Component {
 const ListUsers = ({ users }) => {
     return (
         users.map(user =>
-            <tr>
+            <tr key={user.id} >
                 <td>{user.firstName}  {user.lastName} </td>
                 <td>{user.userName} </td>
             </tr>
@@ -47,11 +49,13 @@ const ListUsers = ({ users }) => {
     );
 }
 
+
 const UserForm = ({ user }) => {
     return (
-        <div className="col-md-8 order-md-1">
-            <h4 className="mb-3">Manage Users</h4>
-            <form className="needs-validation" novalidate>
+        <div className="col-md-6 order-md-1">
+            <h4 className="mb-3">ADD EDIT USER</h4>
+            <hr className="mb-4"></hr>
+            <form className="needs-validation" noValidate>
                 <div className="row">
                     <div className="col-md-6 mb-3">
                         <label htmlFor="firstName">First name</label>
@@ -89,7 +93,6 @@ const UserForm = ({ user }) => {
                         Please enter a valid password.
                     </div>
                 </div>
-                <hr className="mb-4"></hr>
                 <div className="row  float-right">
                     <button className="btn btn-primary" type="button">Cancel</button>
                     <button className="btn btn-primary" type="submit">Save</button>

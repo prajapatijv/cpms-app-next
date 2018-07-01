@@ -1,5 +1,7 @@
 ﻿const requestUsersType = 'REQUEST_USERS';
 const receiveUsersType = 'RECEIVE_USERS';
+const selectUserType = 'SELECT_USER';
+
 const initialState = { users: [], isLoading: false };
 
 export const actionCreators = {
@@ -18,20 +20,21 @@ export const actionCreators = {
 export const reducer = (state, action) => {
     state = state || initialState;
 
-    if (action.type === requestUsersType) {
-        return {
-            ...state,
-            isLoading: true
-        };
+    switch (action.type) {
+        case requestUsersType: {
+            return {
+                ...state,
+                isLoading: true
+            };
+        }
+        case receiveUsersType: {
+            return {
+                ...state,
+                users: action.users,
+                isLoading: false
+            };
+        }
+        default:
+            return state;
     }
-
-    if (action.type === receiveUsersType) {
-        return {
-            ...state,
-            users: action.users,
-            isLoading: false
-        };
-    }
-
-    return state;
 };

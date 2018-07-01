@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
 import './NavMenu.css';
 
 //TODO: Move this to separate folder.
