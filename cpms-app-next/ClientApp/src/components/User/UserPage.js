@@ -9,13 +9,15 @@ class UserPage extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.userData !== this.props.userData) {
+        if (prevProps.users !== this.props.users) {
             // This method runs when incoming props (e.g., route params) change
             this.props.requestUsers();
         }
     }
 
     render() {
+        const { users, selectedUser, onSelectUser } = this.props;
+
         return (
             <div className="row">
                 <div className="col-md-6 order-md-1">
@@ -28,11 +30,11 @@ class UserPage extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            <ListUsers users={this.props.users} onSelectUser={this.props.onSelectUser} />
+                            <ListUsers users={users} onSelectUser={onSelectUser} />
                         </tbody>
                     </table>
                 </div>
-                <UserForm user={this.props.selectedUser} />
+                <UserForm user={selectedUser} />
             </div> 
         );
     }
