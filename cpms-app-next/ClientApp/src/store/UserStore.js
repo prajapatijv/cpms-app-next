@@ -15,7 +15,7 @@ export const actionCreators = {
         dispatch({ type: RECEIVE_USERS, users });
     },
 
-    selectUser: () => ({ type: SELECT_USER })
+    onSelectUser: (selectedUser) => ({ type: SELECT_USER, selectedUser })
 };
 
 
@@ -37,11 +37,9 @@ export const reducer = (state, action) => {
             };
         }
         case SELECT_USER: {
-            //debugger;
-            console.log(action);
             return {
                 ...state,
-                user: {}
+                selectedUser: action.selectedUser
             };
         }
         default:
