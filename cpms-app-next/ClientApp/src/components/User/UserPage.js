@@ -52,12 +52,33 @@ const ListUsers = ({ users, onSelectUser }) => {
 }
 
 
-const UserForm = ({ user }) => {
-    if (user === undefined) {
-        return (null);
+class UserForm extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this)
     }
-    else {
+
+    handleChange(e) {
+        // If you are using babel, you can use ES 6 dictionary syntax
+        // let change = { [e.target.name] = e.target.value }
+        let change = {}
+        change[e.target.name] = e.target.value
+        this.setState(change)
+        //this.props.dispatch()
+    }
+
+    //const { user } = this.props;
+
+    //if (user === undefined) {
+    //    return (null);
+    //}
+    //else {
+    render() {
+        const { user } = this.props
+
         return (
+            (user !== undefined) &&
             <div className="col-md-6 order-md-1">
                 <h4 className="mb-3">ADD EDIT USER</h4>
                 <hr className="mb-4"></hr>
@@ -65,14 +86,14 @@ const UserForm = ({ user }) => {
                     <div className="row">
                         <div className="col-md-6 mb-3">
                             <label htmlFor="firstName">First name</label>
-                            <input type="text" className="form-control" id="firstName" placeholder="" value={user.firstName} required />
+                            <input type="text" className="form-control" name="firstName" placeholder="" value={user.firstName} onChange={(e) => { this.handleChange(e) }} required />
                             <div className="invalid-feedback">
                                 Valid first name is required.
                         </div>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="lastName">Last name</label>
-                            <input type="text" className="form-control" id="lastName" placeholder="" value={user.lastName} onChange={() => { }} required />
+                            <input type="text" className="form-control" name="lastName" placeholder="" value={user.lastName} onChange={() => { }} required />
                             <div className="invalid-feedback">
                                 Valid last name is required.
                         </div>
@@ -85,7 +106,7 @@ const UserForm = ({ user }) => {
                             <div className="input-group-prepend">
                                 <span className="input-group-text">@</span>
                             </div>
-                            <input type="text" className="form-control" id="username" placeholder="Username" value={user.userName} onChange={() => { }} required />
+                            <input type="text" className="form-control" name="username" placeholder="Username" value={user.userName} onChange={() => { }} required />
                             <div className="invalid-feedback">
                                 Your username is required.
                         </div>
