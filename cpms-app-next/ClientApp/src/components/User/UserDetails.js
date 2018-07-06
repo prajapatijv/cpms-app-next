@@ -8,9 +8,7 @@ class UserDetails extends Component {
         const { user } = this.props;
 
         return (
-            <div className="row">
-                <UserForm user={user} />
-            </div>
+            <UserForm user={user} />
         );
     }
 }
@@ -29,7 +27,7 @@ const UserForm = ({ user }) => {
 
     return (
         (user !== undefined) &&
-        <div className="col-md-6 order-md-1">
+        <div>
             <h4 className="mb-3">ADD EDIT USER</h4>
             <hr className="mb-4"></hr>
             <form className="needs-validation" noValidate>

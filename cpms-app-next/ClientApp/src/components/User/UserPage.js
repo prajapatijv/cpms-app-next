@@ -2,6 +2,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../store/UserStore';
+import UserList from './UserList';
 import UserDetails from './UserDetails';
 
 class UserPage extends Component {
@@ -22,20 +23,11 @@ class UserPage extends Component {
         return (
             <div className="row">
                 <div className="col-md-6 order-md-1">
-                    <h2>Manage Users</h2>
-                    <table className="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">UserName</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <ListUsers users={users} onSelectUser={onSelectUser} />
-                        </tbody>
-                    </table>
+                    <UserList {...this.props} />
                 </div>
-                <UserDetails user={selectedUser} />
+                <div className="col-md-6 order-md-1">
+                    <UserDetails user={selectedUser} />
+                </div>
             </div> 
         );
     }
