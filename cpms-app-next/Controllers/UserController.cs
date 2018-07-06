@@ -20,9 +20,27 @@ namespace cpms_app_next.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<AppUser> GetUsers()
+        public IEnumerable<AppUser> Get()
         {
             return this.users;
+        }
+
+        [HttpPost("[action]")]
+        public AppUser Post(AppUser user)
+        {
+            return user;
+        }
+
+        [HttpPut("[action]")]
+        public AppUser Put(AppUser user)
+        {
+            return user;
+        }
+
+        [HttpDelete("[action]")]
+        public AppUser Delete(AppUser user)
+        {
+            return user;
         }
 
         public class AppUser

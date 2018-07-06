@@ -1,21 +1,45 @@
 ﻿const REQUSER_USERS = 'REQUEST_USERS';
 const RECEIVE_USERS = 'RECEIVE_USERS';
 const SELECT_USER = 'SELECT_USER';
+const DELETE_USER = 'DELETE_USER';
+const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
+const SAVE_USER = 'SAVE_USER';
+const SAVE_USER_SUCCESS = 'SAVE_USER_SUCCESS';
 
 const initialState = { users: [], isLoading: false };
 
 export const actionCreators = {
-    requestUsers: () => async (dispatch, getState) => {
+    loadUsers: () => async (dispatch, getState) => {
         dispatch({ type: REQUSER_USERS});
 
-        const url = `api/user/getusers`;
+        const url = `api/user`;
         const response = await fetch(url);
         const users = await response.json();
 
         dispatch({ type: RECEIVE_USERS, users });
     },
 
-    onSelectUser: (selectedUser) => ({ type: SELECT_USER, selectedUser })
+    onSelectUser: (selectedUser) => ({ type: SELECT_USER, selectedUser }),
+
+    onDelete: (user) => async (dispatch, getState) => {
+        dispatch({ type: DELETE_USER });
+
+        const url = `api/user`;
+        const response = await fetch(url);
+        const users = await response.json();
+
+        dispatch({ type: DELETE_USER_SUCCESS, user });
+    },
+
+    onSubmit: (user) => async (dispatch, getState) => {
+        dispatch({ type: SAVE_USER });
+
+        const url = `api/user`;
+        const response = await fetch(url);
+        const users = await response.json();
+
+        dispatch({ type: SAVE_USER_SUCCESS, user });
+    }
 };
 
 

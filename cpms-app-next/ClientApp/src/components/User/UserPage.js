@@ -7,13 +7,13 @@ import UserDetails from './UserDetails';
 
 class UserPage extends Component {
     componentDidMount() {
-        this.props.requestUsers();
+        this.props.loadUsers();
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.users !== this.props.users) {
             // This method runs when incoming props (e.g., route params) change
-            this.props.requestUsers();
+            this.props.loadUsers();
         }
     }
 
