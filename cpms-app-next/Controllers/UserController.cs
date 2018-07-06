@@ -25,14 +25,8 @@ namespace cpms_app_next.Controllers
             return this.users;
         }
 
-        [HttpPost("[action]")]
-        public AppUser Post(AppUser user)
-        {
-            return user;
-        }
-
         [HttpPut("[action]")]
-        public AppUser Put(AppUser user)
+        public AppUser Save(AppUser user)
         {
             return user;
         }

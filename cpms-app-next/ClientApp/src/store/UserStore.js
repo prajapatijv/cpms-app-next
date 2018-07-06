@@ -12,7 +12,6 @@ export const actionCreators = {
     loadUsers: () => async (dispatch, getState) => {
         dispatch({ type: REQUSER_USERS});
 
-        debugger;
         const url = `api/user/getUsers`;
         const response = await fetch(url);
         const users = await response.json();
@@ -20,14 +19,14 @@ export const actionCreators = {
         dispatch({ type: RECEIVE_USERS, users });
     },
 
-    onSelectUser: (selectedUser) => ({ type: SELECT_USER, selectedUser })
+    onSelectUser: (selectedUser) => ({ type: SELECT_USER, selectedUser }),
 
-    /*onDelete: (user) => async (dispatch, getState) => {
+    onDelete: (user) => async (dispatch, getState) => {
         dispatch({ type: DELETE_USER });
 
-        const url = `api/user`;
-        const response = await fetch(url);
-        const users = await response.json();
+        const url = `api/user/delete`;
+        const response = await fetch(url, { method: "DELETE" });
+        const user = await response.json();
 
         dispatch({ type: DELETE_USER_SUCCESS, user });
     },
@@ -35,12 +34,17 @@ export const actionCreators = {
     onSubmit: (user) => async (dispatch, getState) => {
         dispatch({ type: SAVE_USER });
 
-        const url = `api/user`;
-        const response = await fetch(url);
-        const users = await response.json();
+        const url = `api/user/save`;
+        const response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type':'application/json'
+            }});
+        const user = await response.json();
 
         dispatch({ type: SAVE_USER_SUCCESS, user });
-    }*/
+    }
 };
 
 
