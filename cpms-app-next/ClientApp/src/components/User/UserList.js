@@ -1,7 +1,4 @@
-﻿import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { actionCreators } from '../../store/UserStore';
+﻿import React from 'react';
 
 const UserList = ({ users, selectedUser, onSelectUser }) => {
     return(
@@ -33,7 +30,4 @@ const ListUsers = ({ users, onSelectUser }) => {
     );
 }
 
-export default connect(
-    state => state.users,
-    dispatch => bindActionCreators(actionCreators, dispatch)
-)(UserList);
+export default UserList;

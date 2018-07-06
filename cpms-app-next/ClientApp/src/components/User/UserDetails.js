@@ -1,16 +1,9 @@
-﻿import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { actionCreators } from '../../store/UserStore';
+﻿import React from 'react';
 
-class UserDetails extends Component {
-    render() {
-        const { user } = this.props;
-
-        return (
-            <UserForm user={user} />
-        );
-    }
+const UserDetails = ({ user }) => {
+    return (
+        <UserForm user={user} />
+    );
 }
 
 const UserForm = ({ user }) => {
@@ -78,7 +71,4 @@ const UserForm = ({ user }) => {
 }
 
 
-export default connect(
-    state => state.user,
-    dispatch => bindActionCreators(actionCreators, dispatch)
-)(UserDetails);
+export default UserDetails;

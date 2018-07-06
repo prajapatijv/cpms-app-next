@@ -18,7 +18,7 @@ class UserPage extends Component {
     }
 
     render() {
-        const { users, selectedUser, onSelectUser } = this.props;
+        const { selectedUser } = this.props;
 
         return (
             <div className="row">
@@ -31,17 +31,6 @@ class UserPage extends Component {
             </div> 
         );
     }
-}
-
-const ListUsers = ({ users, onSelectUser }) => {
-    return (
-        users.map(user =>
-            <tr key={user.id} onClick={() => onSelectUser(user)} >
-                <td>{user.fullName} </td>
-                <td>{user.userName} </td>
-            </tr>
-        )
-    );
 }
 
 export default connect(
