@@ -12,16 +12,17 @@ export const actionCreators = {
     loadUsers: () => async (dispatch, getState) => {
         dispatch({ type: REQUSER_USERS});
 
-        const url = `api/user`;
+        debugger;
+        const url = `api/user/getUsers`;
         const response = await fetch(url);
         const users = await response.json();
 
         dispatch({ type: RECEIVE_USERS, users });
     },
 
-    onSelectUser: (selectedUser) => ({ type: SELECT_USER, selectedUser }),
+    onSelectUser: (selectedUser) => ({ type: SELECT_USER, selectedUser })
 
-    onDelete: (user) => async (dispatch, getState) => {
+    /*onDelete: (user) => async (dispatch, getState) => {
         dispatch({ type: DELETE_USER });
 
         const url = `api/user`;
@@ -39,7 +40,7 @@ export const actionCreators = {
         const users = await response.json();
 
         dispatch({ type: SAVE_USER_SUCCESS, user });
-    }
+    }*/
 };
 
 

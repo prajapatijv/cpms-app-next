@@ -20,7 +20,7 @@ namespace cpms_app_next.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<AppUser> Get()
+        public IEnumerable<AppUser> GetUsers()
         {
             return this.users;
         }
