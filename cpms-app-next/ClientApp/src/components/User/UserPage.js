@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { actionCreators } from '../../store/UserStore';
 import UserList from './UserList';
 import UserDetails from './UserDetails';
+import { handleChange } from '../../Utility';
+
 
 class UserPage extends Component {
     componentDidMount() {
@@ -26,7 +28,7 @@ class UserPage extends Component {
                     <UserList {...this.props} />
                 </div>
                 <div className="col-md-6 order-md-1">
-                    <UserDetails user={selectedUser} />
+                    <UserDetails user={selectedUser} handleChange={handleChange} />
                 </div>
             </div> 
         );

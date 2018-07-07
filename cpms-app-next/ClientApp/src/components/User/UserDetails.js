@@ -1,23 +1,6 @@
 ﻿import React from 'react';
 
-const UserDetails = ({ user }) => {
-    return (
-        <UserForm user={user} />
-    );
-}
-
-const UserForm = ({ user }) => {
-
-    /*
-    handleChange(e) {
-        // If you are using babel, you can use ES 6 dictionary syntax
-        // let change = { [e.target.name] = e.target.value }
-        let change = {}
-        change[e.target.name] = e.target.value
-        this.setState(change)
-        //this.props.dispatch()
-    }*/
-
+const UserDetails = ({ user, handleChange}) => {
     return (
         (user !== undefined) &&
         <div>
@@ -27,7 +10,7 @@ const UserForm = ({ user }) => {
                 <div className="row">
                     <div className="col-md-6 mb-3">
                         <label htmlFor="firstName">First name</label>
-                        <input type="text" className="form-control" name="firstName" placeholder="" value={user.firstName} onChange={(e) => { this.handleChange(e) }} required />
+                        <input type="text" className="form-control" name="firstName" placeholder="" value={user.firstName} onChange={(e) => { handleChange(e) }} required />
                         <div className="invalid-feedback">
                             Valid first name is required.
                         </div>
@@ -69,6 +52,5 @@ const UserForm = ({ user }) => {
         </div>
     );
 }
-
 
 export default UserDetails;

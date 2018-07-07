@@ -13,10 +13,9 @@ export const actionCreators = {
         dispatch({ type: REQUSER_USERS});
 
         const url = `api/user/getUsers`;
-        const response = await fetch(url);
-        const users = await response.json();
-
-        dispatch({ type: RECEIVE_USERS, users });
+        fetch(url)
+            .then(res => res.json())
+            .then(users => dispatch({ type: RECEIVE_USERS, users }));
     },
 
     onSelectUser: (selectedUser) => ({ type: SELECT_USER, selectedUser }),
@@ -34,17 +33,18 @@ export const actionCreators = {
     onSubmit: (user) => async (dispatch, getState) => {
         dispatch({ type: SAVE_USER });
 
-        const url = `api/user/save`;
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(user),
-            headers: {
-                'Content-Type':'application/json'
-            }});
-        const user = await response.json();
+        return dispatch => {
+            return fetch('/api/user/save', {
+                method: 'post',
+                body: JSON.stringify(user),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(user => dispatch({ type: SAVE_USER_SUCCESS, user }));
+        }
+    },
 
-        dispatch({ type: SAVE_USER_SUCCESS, user });
-    }
+
 };
 
 
