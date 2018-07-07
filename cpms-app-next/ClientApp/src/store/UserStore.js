@@ -1,6 +1,7 @@
 ﻿const REQUSER_USERS = 'REQUEST_USERS';
 const RECEIVE_USERS = 'RECEIVE_USERS';
 const SELECT_USER = 'SELECT_USER';
+const CHANGE_USER = 'CHANGE_USER';
 const DELETE_USER = 'DELETE_USER';
 const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 const SAVE_USER = 'SAVE_USER';
@@ -10,7 +11,7 @@ const initialState = { users: [], isLoading: false };
 
 export const actionCreators = {
     loadUsers: () => async (dispatch, getState) => {
-        dispatch({ type: REQUSER_USERS});
+        dispatch({ type: REQUSER_USERS });
 
         const url = `api/user/getUsers`;
         fetch(url)
@@ -19,6 +20,8 @@ export const actionCreators = {
     },
 
     onSelectUser: (selectedUser) => ({ type: SELECT_USER, selectedUser }),
+
+    onChange: (e) => ({type: CHANGE_USER, user: e.target.value}),
 
     onDelete: (user) => async (dispatch, getState) => {
         dispatch({ type: DELETE_USER });
@@ -68,8 +71,14 @@ export const reducer = (state, action) => {
         case SELECT_USER: {
             return {
                 ...state,
-                selectedUser: action.selectedUser
+                user: action.selectedUser
             };
+        }
+        case CHANGE_USER: {
+            return {
+                ...state,
+                user:action.updatedUser
+            }
         }
         default:
             return state;

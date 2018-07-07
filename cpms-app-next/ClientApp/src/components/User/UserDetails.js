@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-const UserDetails = ({ user, handleChange}) => {
+const UserDetails = ({ user, onChange}) => {
     return (
         (user !== undefined) &&
         <div>
@@ -10,7 +10,7 @@ const UserDetails = ({ user, handleChange}) => {
                 <div className="row">
                     <div className="col-md-6 mb-3">
                         <label htmlFor="firstName">First name</label>
-                        <input type="text" className="form-control" name="firstName" placeholder="" value={user.firstName} onChange={(e) => { handleChange(e) }} required />
+                        <input type="text" className="form-control" name="firstName" placeholder="" value={user.firstName} onChange={(e) => { onChange(e) }} required />
                         <div className="invalid-feedback">
                             Valid first name is required.
                         </div>
