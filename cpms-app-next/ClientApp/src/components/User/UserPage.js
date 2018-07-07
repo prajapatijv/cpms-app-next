@@ -13,10 +13,10 @@ class UserPage extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.users !== this.props.users) {
+        //if (prevProps.users !== this.props.users) {
             // This method runs when incoming props (e.g., route params) change
-            this.props.loadUsers();
-        }
+          //  this.props.loadUsers();
+        //}
     }
 
     render() {

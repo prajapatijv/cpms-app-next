@@ -1,6 +1,8 @@
 ﻿import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 import * as Counter from './Counter';
 import * as WeatherForecasts from './WeatherForecasts';
 import * as Users from './UserStore';
@@ -29,9 +31,10 @@ export default function configureStore(history, initialState) {
     routing: routerReducer
   });
 
+
   return createStore(
     rootReducer,
     initialState,
-    compose(applyMiddleware(...middleware), ...enhancers)
+     compose(applyMiddleware(...middleware), ...enhancers)
   );
 }
