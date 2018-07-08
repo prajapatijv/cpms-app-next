@@ -1,6 +1,38 @@
 ﻿import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 
-const UserDetails = ({ user, onChange}) => {
+const UserDetails = props => {
+    const { user, handleSubmit, pristine, reset, submitting } = props
+    return (
+        (user !== undefined) &&
+        <div>
+            <h4 className="mb-3">ADD EDIT USER</h4>
+            <hr className="mb-4"></hr>
+            <form onSubmit={handleSubmit}>
+                <div className="row">
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="firstName">First name</label>
+                        <div>
+                            <Field
+                                name="firstName"
+                                component="input"
+                                type="text"
+                                placeholder="First Name"
+                                className="form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    )
+}
+
+export default reduxForm({
+    form: 'userForm',
+})(UserDetails)
+
+/*const UserDetails = ({ user, onChange}) => {
     return (
         (user !== undefined) &&
         <div>
@@ -53,4 +85,4 @@ const UserDetails = ({ user, onChange}) => {
     );
 }
 
-export default UserDetails;
+export default UserDetails;*/

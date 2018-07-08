@@ -21,7 +21,7 @@ export const actionCreators = {
 
     onSelectUser: (selectedUser) => ({ type: SELECT_USER, selectedUser }),
 
-    onChange: (e) => ({type: CHANGE_USER, user: e.target.value}),
+    //onChange: (e) => ({type: CHANGE_USER, user: e.target.value}),
 
     onDelete: (user) => async (dispatch, getState) => {
         dispatch({ type: DELETE_USER });

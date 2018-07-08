@@ -1,6 +1,7 @@
 ﻿import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import * as Counter from './Counter';
@@ -9,6 +10,7 @@ import * as Users from './UserStore';
 
 export default function configureStore(history, initialState) {
   const reducers = {
+    form:formReducer,
     counter: Counter.reducer,
     weatherForecasts: WeatherForecasts.reducer,
     users: Users.reducer
