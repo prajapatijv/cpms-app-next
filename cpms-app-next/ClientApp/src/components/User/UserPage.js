@@ -28,7 +28,7 @@ class UserPage extends Component {
                     <UserList {...this.props} />
                 </div>
                 <div className="col-md-6 order-md-1">
-                    <UserDetails user={user} onChange={onChange} />
+                    <UserDetails user={user} initialValues={user} />
                 </div>
             </div> 
         );
