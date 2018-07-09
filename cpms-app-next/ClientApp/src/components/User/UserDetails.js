@@ -3,13 +3,14 @@ import { Field, reduxForm } from 'redux-form';
 import {renderField } from '../ui'
 
 const UserDetails = props => {
-    const { user, handleSubmit, pristine, reset, submitting } = props
+
+    const { user, pristine, reset, submitting, submitUser} = props
     return (
         (user !== undefined) &&
         <div>
             <h4 className="mb-3">ADD EDIT USER</h4>
             <hr className="mb-4"></hr>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={submitUser}>
                 <div className="row">
                     <div className="col-md-6 mb-3">
                         <label htmlFor="firstName">First name</label>
@@ -55,7 +56,7 @@ const UserDetails = props => {
 
 export default reduxForm({
     form: 'userForm',
-    enableReinitialize:'true'
+    enableReinitialize: 'true'
 })(UserDetails)
 
 /*const UserDetails = ({ user, onChange}) => {

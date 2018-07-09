@@ -20,7 +20,7 @@ class UserPage extends Component {
     }
 
     render() {
-        const { user, onChange } = this.props;
+        const { user, onChange, onSubmit} = this.props;
 
         return (
             <div className="row">
@@ -28,7 +28,7 @@ class UserPage extends Component {
                     <UserList {...this.props} />
                 </div>
                 <div className="col-md-6 order-md-1">
-                    <UserDetails user={user} initialValues={user} />
+                    <UserDetails user={user} initialValues={user} submitUser={onSubmit} />
                 </div>
             </div> 
         );
