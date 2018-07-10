@@ -3,14 +3,19 @@ import { Field, reduxForm } from 'redux-form';
 import {renderField } from '../ui'
 
 const UserDetails = props => {
+    const handleSubmit = (e) => {
+        debugger;
+        e.preventDefault();
 
-    const { user, pristine, reset, submitting, submitUser} = props
+    }
+
+    const { user, pristine, reset, submitting, onSubmitUser} = props
     return (
         (user !== undefined) &&
         <div>
             <h4 className="mb-3">ADD EDIT USER</h4>
             <hr className="mb-4"></hr>
-            <form onSubmit={submitUser}>
+            <form onSubmit={handleSubmit}>
                 <div className="row">
                     <div className="col-md-6 mb-3">
                         <label htmlFor="firstName">First name</label>
@@ -46,8 +51,8 @@ const UserDetails = props => {
                     </div>
                 </div>
                 <div className="row  float-right">
-                    <button className="btn btn-outline-primary" type="button">Cancel</button>
-                    <button className="btn btn-outline-primary" type="submit">Save</button>
+                    <button className="btn btn-outline-primary" type="button" onClick={reset} disabled={pristine || submitting} >Cancel</button>
+                    <button className="btn btn-outline-primary" type="submit" disabled={pristine || submitting}>Save</button>
                 </div>
             </form>
         </div>

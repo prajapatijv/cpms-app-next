@@ -19,8 +19,8 @@ namespace cpms_app_next.Controllers
             this.users.Add(new AppUser { Id = 3, FirstName = "Manish", LastName = "Mistry", UserName = "manish", Password = "test0002", Role = "Operator" });
         }
 
-        [HttpGet("[action]")]
-        public IEnumerable<AppUser> GetUsers()
+        [HttpGet()]
+        public IEnumerable<AppUser> Get()
         {
             return this.users;
         }

@@ -13,15 +13,14 @@ export const actionCreators = {
     loadUsers: () => async (dispatch, getState) => {
         dispatch({ type: REQUSER_USERS });
 
-        const url = `api/user/getUsers`;
-        fetch(url)
-            .then(res => res.json())
-            .then(users => dispatch({ type: RECEIVE_USERS, users }));
+        const url = `api/user`;
+        const response = await fetch(url);
+        const users = await response.json();
+
+        dispatch({ type: RECEIVE_USERS, users });
     },
 
     onSelectUser: (selectedUser) => ({ type: SELECT_USER, selectedUser }),
-
-    //onChange: (e) => ({type: CHANGE_USER, user: e.target.value}),
 
     onDelete: (user) => async (dispatch, getState) => {
         dispatch({ type: DELETE_USER });
@@ -33,7 +32,7 @@ export const actionCreators = {
         dispatch({ type: DELETE_USER_SUCCESS, user });
     },
 
-    onSubmit: (user) => async (dispatch, getState) => {
+    onSubmitUser: (user) => async (dispatch, getState) => {
         dispatch({ type: SAVE_USER });
 
         return dispatch => {
@@ -73,12 +72,6 @@ export const reducer = (state, action) => {
                 ...state,
                 user: action.selectedUser
             };
-        }
-        case CHANGE_USER: {
-            return {
-                ...state,
-                user:action.updatedUser
-            }
         }
         default:
             return state;
