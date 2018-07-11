@@ -33,6 +33,7 @@ export const actionCreators = {
     },
 
     onSubmitUser: (user) => async (dispatch, getState) => {
+        debugger;
         dispatch({ type: SAVE_USER });
 
         return dispatch => {

@@ -1,58 +1,32 @@
 ﻿import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import {renderField } from '../ui'
+import {renderField , renderFieldWithPrefix } from '../ui'
 
 const UserDetails = props => {
-    const handleSubmit = (e) => {
+    const handleSubmit = (values) => {
         debugger;
-        e.preventDefault();
+        //e.preventDefault();
 
     }
 
-    const { user, pristine, reset, submitting, onSubmitUser} = props
+    const { user, pristine, reset, submitting, onSubmitUser, dispatch} = props
     return (
         (user !== undefined) &&
         <div>
             <h4 className="mb-3">ADD EDIT USER</h4>
             <hr className="mb-4"></hr>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <div className="row">
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="firstName">First name</label>
-                        <div>
-                            <Field name="firstName" component="input" type="text" placeholder="First Name" className="form-control"/>
-                        </div>
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="lastName">Last name</label>
-                        <div>
-                            <Field name="lastName" component="input" type="text" placeholder="Last Name" className="form-control" />
-                        </div>
-                    </div>
+                    <Field name="firstName" component={renderField} type="text" label="First Name" className="col-md-6 mb-3" />
+                    <Field name="lastName" component={renderField} type="text" label="Last Name" className="col-md-6 mb-3" />
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="userName">Username</label>
-                    <div className="input-group">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text">@</span>
-                        </div>
-                        <Field name="userName" component="input" placeholder="Username"  required className="form-control" />
-                        <div className="invalid-feedback">
-                            Your username is required.
-                        </div>
-                    </div>
-                </div>
+                <Field name="userName" component={renderFieldWithPrefix} type="text" label="User Name" prefix="@" className="mb-3" />
 
-                <div className="mb-3">
-                    <label htmlFor="password">Password</label>
-                    <Field name="password" component="input" type="password" placeholder="Password" required className="form-control" />
-                    <div className="invalid-feedback">
-                        Please enter a valid password.
-                    </div>
-                </div>
+                <Field name="password" component={renderField} type="password" label="Password" className="mb-3" />
+
                 <div className="row  float-right">
                     <button className="btn btn-outline-primary" type="button" onClick={reset} disabled={pristine || submitting} >Cancel</button>
-                    <button className="btn btn-outline-primary" type="submit" disabled={pristine || submitting}>Save</button>
+                    <button className="btn btn-outline-primary" type="button" onClick={() => dispatch(onSubmitUser)} disabled={pristine || submitting}>Save</button>
                 </div>
             </form>
         </div>
