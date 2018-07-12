@@ -25,16 +25,18 @@ namespace cpms_app_next.Controllers
             return this.users;
         }
 
-        [HttpPut("[action]")]
-        public AppUser Save(AppUser user)
+        [HttpPost()]
+        public IEnumerable<AppUser> Post([FromBody] AppUser user)
         {
-            return user;
+            this.users.Add(user);
+            return this.users;
         }
 
-        [HttpDelete("[action]")]
-        public AppUser Delete(AppUser user)
+        [HttpDelete()]
+        public IEnumerable<AppUser> Delete([FromBody] AppUser user)
         {
-            return user;
+            this.users.Remove(user);
+            return this.users;
         }
 
         public class AppUser

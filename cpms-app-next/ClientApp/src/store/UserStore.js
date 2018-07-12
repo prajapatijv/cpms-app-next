@@ -1,7 +1,6 @@
 ﻿const REQUSER_USERS = 'REQUEST_USERS';
 const RECEIVE_USERS = 'RECEIVE_USERS';
 const SELECT_USER = 'SELECT_USER';
-const CHANGE_USER = 'CHANGE_USER';
 const DELETE_USER = 'DELETE_USER';
 const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 const SAVE_USER = 'SAVE_USER';
@@ -29,22 +28,24 @@ export const actionCreators = {
         const response = await fetch(url, { method: "DELETE" });
         const user = await response.json();
 
-        dispatch({ type: DELETE_USER_SUCCESS, user });
+        dispatch({ type: RECEIVE_USERS, user });
     },
 
     onSubmitUser: (user) => async (dispatch, getState) => {
-        debugger;
         dispatch({ type: SAVE_USER });
+        const url = `api/user`;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        });
 
-        return dispatch => {
-            return fetch('/api/user/save', {
-                method: 'post',
-                body: JSON.stringify(user),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }).then(user => dispatch({ type: SAVE_USER_SUCCESS, user }));
-        }
+        const users = await response.json();
+
+        dispatch({ type: RECEIVE_USERS, users });
     },
 
 
