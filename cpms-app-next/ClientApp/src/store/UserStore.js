@@ -66,6 +66,7 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 users: action.users,
+                user: undefined,
                 isLoading: false
             };
         }
