@@ -4,7 +4,7 @@ import {renderField , renderFieldWithPrefix } from '../ui'
 
 const UserDetails = props => {
     
-    const { user, pristine, reset, submitting, onSubmitUser, dispatch, handleSubmit} = props
+    const { user, pristine, reset, submitting, onSubmitUser, handleSubmit} = props
     return (
         (user !== undefined) &&
         <div>

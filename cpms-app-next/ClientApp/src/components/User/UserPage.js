@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { actionCreators } from '../../store/UserStore';
 import UserList from './UserList';
 import UserDetails from './UserDetails';
-import { handleChange } from '../../Utility';
-
 
 class UserPage extends Component {
     componentDidMount() {
@@ -20,7 +18,7 @@ class UserPage extends Component {
     }
 
     render() {
-        const { user, onChange, onSubmitUser} = this.props;
+        const { user, onSubmitUser} = this.props;
 
         return (
             <div className="row">
