@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using cpms_app_next.EF;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cpms_app_next.Controllers
@@ -9,49 +10,41 @@ namespace cpms_app_next.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        public List<AppUser> users;
-
         public UserController()
         {
-            this.users = new List<AppUser>();
-            this.users.Add(new AppUser { Id = 1, FirstName = "Jitendra", LastName = "Prajapati", UserName = "prajapatijv", Password = "test0000", Role = "Admin" });
-            this.users.Add(new AppUser { Id = 2, FirstName = "Sandip", LastName = "Shah", UserName = "shahsandip", Password = "test0001", Role = "Admin" });
-            this.users.Add(new AppUser { Id = 3, FirstName = "Manish", LastName = "Mistry", UserName = "manish", Password = "test0002", Role = "Operator" });
         }
 
         [HttpGet()]
-        public IEnumerable<AppUser> Get()
+        public IEnumerable<User> Get()
         {
-            return this.users;
+            using (var db = new cpms_app_next.EF.CPMSDbContext())
+            {
+                return db.Users.ToList();
+            }
         }
 
         [HttpPost()]
-        public IEnumerable<AppUser> Post([FromBody] AppUser user)
+        public IEnumerable<User> Post([FromBody] User user)
         {
-            this.users.Add(user);
-            return this.users;
+            using (var db = new cpms_app_next.EF.CPMSDbContext())
+            {
+                db.Users.Add(user);
+                db.SaveChanges();
+
+                return Get();
+            }
         }
 
         [HttpDelete()]
-        public IEnumerable<AppUser> Delete([FromBody] AppUser user)
+        public IEnumerable<User> Delete([FromBody] User user)
         {
-            this.users.Remove(user);
-            return this.users;
-        }
-
-        public class AppUser
-        {
-            public int Id { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public string FullName
+            using (var db = new cpms_app_next.EF.CPMSDbContext())
             {
-                get { return $"{ FirstName} { LastName}" ; }
-            }
+                db.Users.Remove(user);
+                db.SaveChanges();
 
-            public string UserName { get; set; }
-            public string Password { get; set; }
-            public string Role { get; set; }
+                return Get();
+            }
         }
     }
 }
