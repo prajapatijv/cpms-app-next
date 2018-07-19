@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using cpms_app_next.EF;
+using cpms.EF;
 using Microsoft.AspNetCore.Mvc;
 
-namespace cpms_app_next.Controllers
+namespace cpms.Controllers
 {
     [Route("api/[controller]")]
     public class UserController : Controller
@@ -17,7 +17,7 @@ namespace cpms_app_next.Controllers
         [HttpGet()]
         public IEnumerable<User> Get()
         {
-            using (var db = new cpms_app_next.EF.CPMSDbContext())
+            using (var db = new EF.CPMSDbContext())
             {
                 return db.Users.ToList();
             }
@@ -26,9 +26,22 @@ namespace cpms_app_next.Controllers
         [HttpPost()]
         public IEnumerable<User> Post([FromBody] User user)
         {
-            using (var db = new cpms_app_next.EF.CPMSDbContext())
+            using (var db = new EF.CPMSDbContext())
             {
                 db.Users.Add(user);
+                db.SaveChanges();
+
+                return Get();
+            }
+        }
+
+        [HttpPut()]
+        public IEnumerable<User> Put([FromBody] User user)
+        {
+            using (var db = new EF.CPMSDbContext())
+            {
+                db.Attach<User>(user);
+                db.Users.Update(user);
                 db.SaveChanges();
 
                 return Get();
@@ -38,7 +51,7 @@ namespace cpms_app_next.Controllers
         [HttpDelete()]
         public IEnumerable<User> Delete([FromBody] User user)
         {
-            using (var db = new cpms_app_next.EF.CPMSDbContext())
+            using (var db = new EF.CPMSDbContext())
             {
                 db.Users.Remove(user);
                 db.SaveChanges();

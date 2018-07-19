@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace cpms_app_next.EF
+namespace cpms.EF
 {
     public class CPMSDbContext : DbContext
     {
@@ -24,5 +24,11 @@ namespace cpms_app_next.EF
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
+        public string FullName {
+            get
+            {
+                return this.FirstName + " " + this.LastName;
+            }
+        }
     }
 }

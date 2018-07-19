@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using cpms_app_next.EF;
+using cpms.EF;
 
 namespace cpmsappnext.Migrations
 {

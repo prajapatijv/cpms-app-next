@@ -6,6 +6,7 @@ const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 const SAVE_USER = 'SAVE_USER';
 const SAVE_USER_SUCCESS = 'SAVE_USER_SUCCESS';
 const ADD_USER = 'ADD_USER';
+const API_URL = `api/user`;
 
 const initialState = { users: [], isLoading: false };
 
@@ -13,8 +14,7 @@ export const actionCreators = {
     loadUsers: () => async (dispatch, getState) => {
         dispatch({ type: REQUSER_USERS });
 
-        const url = `api/user`;
-        const response = await fetch(url);
+        const response = await fetch(API_URL);
         const users = await response.json();
 
         dispatch({ type: RECEIVE_USERS, users });
@@ -26,8 +26,7 @@ export const actionCreators = {
 
     onDeleteUser: (user) => async (dispatch, getState) => {
         dispatch({ type: DELETE_USER });
-        const url = `api/user`;
-        const response = await fetch(url, {
+        const response = await fetch(API_URL, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -43,9 +42,8 @@ export const actionCreators = {
 
     onSubmitUser: (user) => async (dispatch, getState) => {
         dispatch({ type: SAVE_USER });
-        const url = `api/user`;
-        const response = await fetch(url, {
-            method: 'POST',
+        const response = await fetch(API_URL, {
+            method: (user.id === 0 ? 'POST' : 'PUT'),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -89,13 +87,27 @@ export const reducer = (state, action) => {
         case ADD_USER: {
             return {
                 ...state,
-                user: {}
+                user: { id : 0}
+            };
+        }
+        case SAVE_USER_SUCCESS:{
+            return {
+                ...state,
+                users: action.users,
+                saved: true
             };
         }
         case DELETE_USER: {
             return {
                 ...state,
                 user: action.selectedUser
+            };
+        }
+        case DELETE_USER_SUCCESS: {
+            return {
+                ...state,
+                users: action.users,
+                saved: true
             };
         }
         default:
