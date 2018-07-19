@@ -5,6 +5,7 @@ const DELETE_USER = 'DELETE_USER';
 const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 const SAVE_USER = 'SAVE_USER';
 const SAVE_USER_SUCCESS = 'SAVE_USER_SUCCESS';
+const ADD_USER = 'ADD_USER';
 
 const initialState = { users: [], isLoading: false };
 
@@ -19,16 +20,25 @@ export const actionCreators = {
         dispatch({ type: RECEIVE_USERS, users });
     },
 
+    onAddUser: () => ({ type: ADD_USER }),
+
     onSelectUser: (selectedUser) => ({ type: SELECT_USER, selectedUser }),
 
-    onDelete: (user) => async (dispatch, getState) => {
+    onDeleteUser: (user) => async (dispatch, getState) => {
         dispatch({ type: DELETE_USER });
+        const url = `api/user`;
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        });
 
-        const url = `api/user/delete`;
-        const response = await fetch(url, { method: "DELETE" });
-        const user = await response.json();
+        const users = await response.json();
 
-        dispatch({ type: RECEIVE_USERS, user });
+        dispatch({ type: DELETE_USER_SUCCESS, users });
     },
 
     onSubmitUser: (user) => async (dispatch, getState) => {
@@ -45,7 +55,7 @@ export const actionCreators = {
 
         const users = await response.json();
 
-        dispatch({ type: RECEIVE_USERS, users });
+        dispatch({ type: SAVE_USER_SUCCESS, users });
     },
 
 
@@ -71,6 +81,18 @@ export const reducer = (state, action) => {
             };
         }
         case SELECT_USER: {
+            return {
+                ...state,
+                user: action.selectedUser
+            };
+        }
+        case ADD_USER: {
+            return {
+                ...state,
+                user: {}
+            };
+        }
+        case DELETE_USER: {
             return {
                 ...state,
                 user: action.selectedUser
