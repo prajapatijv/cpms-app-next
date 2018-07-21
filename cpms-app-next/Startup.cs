@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using cpms.Repository;
 
 namespace cpms
 {
@@ -24,8 +25,8 @@ namespace cpms
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<CPMSDbContext>(options => 
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            //Resiter App Services
+            ResiterAppServices(services);
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -67,6 +68,17 @@ namespace cpms
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+        }
+
+        public void ResiterAppServices(IServiceCollection services)
+        {
+            //EF
+            services.AddDbContext<CPMSDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            //Repositories
+            services.AddScoped<IUserRepository, UserRepository>();
+
         }
     }
 }
