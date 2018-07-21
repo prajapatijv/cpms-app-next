@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using cpms.Core;
-using cpms.EF;
+﻿using cpms.Core;
+using cpms.Models;
 using cpms.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace cpms.Controllers
 {
