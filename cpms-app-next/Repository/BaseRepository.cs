@@ -1,4 +1,5 @@
 ﻿using cpms.EF;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,39 +7,76 @@ using System.Threading.Tasks;
 
 namespace cpms.Repository
 {
-    public interface IRepostiory<T>
+    public interface IEntity
     {
-        IEnumerable<T> GetAll();
-        IEnumerable<T> Insert(T entity);
-        IEnumerable<T> Update(T entity);
-        IEnumerable<T> Delete(T entity);
+        int Id { get; set; }
     }
 
-    public class BaseRepository<T> : IRepostiory<T>
+    public interface IGenericRepository<TEntity>
+            where TEntity : class, IEntity
     {
-        public IEnumerable<T> Delete(T entity)
+        IQueryable<TEntity> GetAll();
+
+        Task<TEntity> GetById(int id);
+
+        Task Create(TEntity entity);
+
+        Task Update(int id, TEntity entity);
+
+        Task Delete(int id);
+    }
+
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity>
+        where TEntity : class, IEntity
+    {
+        private readonly CPMSDbContext _dbContext;
+
+        public GenericRepository(CPMSDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public IEnumerable<T> GetAll()
+        public IQueryable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Set<TEntity>().AsNoTracking();
         }
 
-        public IEnumerable<T> Insert(T entity)
+        public async Task<TEntity> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<TEntity>()
+                .AsNoTracking()
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public IEnumerable<T> Update(T entity)
+        public async Task Create(TEntity entity)
         {
-            throw new NotImplementedException();
+            await _dbContext.Set<TEntity>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task Update(int id, TEntity entity)
+        {
+            _dbContext.Set<TEntity>().Update(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task Delete(int id)
+        {
+            var entity = await _dbContext.Set<TEntity>().FindAsync(id);
+            _dbContext.Set<TEntity>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
     }
 
-    public class UserRepository : BaseRepository<User>
+    public interface IUserRepository : IGenericRepository<User>
     {
+    }
 
+    public class UserRepository : GenericRepository<User> , IUserRepository
+    {
+        public UserRepository(CPMSDbContext dbContext) 
+            : base(dbContext)
+        {
+        }
     }
 }

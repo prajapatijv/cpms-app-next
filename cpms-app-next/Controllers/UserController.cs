@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using cpms.Core;
 using cpms.EF;
+using cpms.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cpms.Controllers
@@ -10,54 +12,41 @@ namespace cpms.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        public UserController()
+        private readonly IUserRepository _repository;
+
+        public UserController(IUserRepository repository)
         {
+            _repository = repository;
         }
 
         [HttpGet()]
-        public IEnumerable<User> Get()
+        public IQueryable<User> Get()
         {
-            using (var db = new EF.CPMSDbContext())
-            {
-                return db.Users.ToList();
-            }
+            return _repository.GetAll();        
         }
 
         [HttpPost()]
+        [ValidateModel]
         public IEnumerable<User> Post([FromBody] User user)
         {
-            using (var db = new EF.CPMSDbContext())
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-
-                return Get();
-            }
+            _repository.Create(user);
+            return _repository.GetAll();
         }
 
         [HttpPut()]
+        [ValidateModel]
         public IEnumerable<User> Put([FromBody] User user)
         {
-            using (var db = new EF.CPMSDbContext())
-            {
-                db.Attach<User>(user);
-                db.Users.Update(user);
-                db.SaveChanges();
-
-                return Get();
-            }
+            _repository.Update(user.Id, user);
+            return _repository.GetAll();
         }
 
         [HttpDelete()]
+        [ValidateModel]
         public IEnumerable<User> Delete([FromBody] User user)
         {
-            using (var db = new EF.CPMSDbContext())
-            {
-                db.Users.Remove(user);
-                db.SaveChanges();
-
-                return Get();
-            }
+            _repository.Delete(user.Id);
+            return _repository.GetAll();
         }
     }
 }
