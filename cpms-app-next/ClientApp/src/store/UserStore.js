@@ -1,4 +1,6 @@
-﻿const REQUSER_USERS = 'REQUEST_USERS';
+﻿import { SubmissionError } from 'redux-form';  // ES6
+
+const REQUSER_USERS = 'REQUEST_USERS';
 const RECEIVE_USERS = 'RECEIVE_USERS';
 const SELECT_USER = 'SELECT_USER';
 const DELETE_USER = 'DELETE_USER';
@@ -14,8 +16,10 @@ export const actionCreators = {
     loadUsers: () => async (dispatch, getState) => {
         dispatch({ type: REQUSER_USERS });
 
-        const response = await fetch(API_URL);
-        const users = await response.json();
+        const response = await fetch(API_URL)
+            .then(res => res.json())
+            .catch(error => { throw new SubmissionError(error.validationErrors) });
+        const users = await response;
 
         dispatch({ type: RECEIVE_USERS, users });
     },
@@ -51,9 +55,19 @@ export const actionCreators = {
             body: JSON.stringify(user)
         });
 
-        const users = await response.json();
-
-        dispatch({ type: SAVE_USER_SUCCESS, users });
+            //.then(res => res.json())
+            //.catch(error => { throw new SubmissionError(error.validationErrors) });
+        try {
+            //const users = await response.json();
+            if (response.ok) {
+                const users = await response.json()
+                dispatch({ type: SAVE_USER_SUCCESS, users });
+            } else {
+                throw new SubmissionError(response)
+            }
+        }
+        catch (error) {
+        }
     },
 
 
