@@ -45,6 +45,7 @@ export const actionCreators = {
     },
 
     onSubmitUser: (user) => async (dispatch, getState) => {
+
         dispatch({ type: SAVE_USER });
         const response = await fetch(API_URL, {
             method: (user.id === 0 ? 'POST' : 'PUT'),
@@ -55,22 +56,9 @@ export const actionCreators = {
             body: JSON.stringify(user)
         });
 
-            //.then(res => res.json())
-            //.catch(error => { throw new SubmissionError(error.validationErrors) });
-        try {
-            //const users = await response.json();
-            if (response.ok) {
-                const users = await response.json()
-                dispatch({ type: SAVE_USER_SUCCESS, users });
-            } else {
-                throw new SubmissionError(response)
-            }
-        }
-        catch (error) {
-        }
+        const users = await response.json()
+        dispatch({ type: SAVE_USER_SUCCESS, users });
     },
-
-
 };
 
 
