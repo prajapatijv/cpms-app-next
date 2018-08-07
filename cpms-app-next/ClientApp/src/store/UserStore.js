@@ -89,7 +89,7 @@ export const reducer = (state, action) => {
         case ADD_USER: {
             return {
                 ...state,
-                user: { id : 0}
+                user: { id: 0, firstName: ''}
             };
         }
         case SAVE_USER_SUCCESS:{

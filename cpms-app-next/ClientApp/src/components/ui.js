@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-export const renderField = ({ input, label, type, className, meta: { touched, error, warning } }) => (
+export const renderField = ({ input, label, type, className, maxLength, meta: { touched, error, warning } }) => (
     <div className={className}>
         <label htmlFor={label}>{label}</label>
         <div>
@@ -28,11 +28,20 @@ export const renderFieldWithPrefix = ({ input, label, type, prefix, className, m
 )
 
 //Validations
+
 export const required = value => (value || typeof value === 'number' ? undefined : 'Required')
-export const maxLength = max => value => value && value.length > max ? `Must be ${max} characters or less` : undefined
-export const minLength = min => value => value && value.length < min ? `Must be ${min} characters or more` : undefined
 export const number = value => value && isNaN(Number(value)) ? 'Must be a number' : undefined
-export const minValue = min => value => value && value < min ? `Must be at least ${min}` : undefined
+
+//Min Length
+const minValue = min => value =>
+    value && value < min ? `Must be at least ${min}` : undefined
+
+
+//Max Length
+const maxLength = max => value =>
+    value && value.length > max ? `Must be ${max} characters or less` : undefined
+
+export const maxLength5 = maxLength(5)
 
 export const email = value =>
     value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)

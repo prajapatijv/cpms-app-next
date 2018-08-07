@@ -1,10 +1,11 @@
 ﻿import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import {renderField , renderFieldWithPrefix , required, alphaSpaces } from '../ui'
+import { renderField, renderFieldWithPrefix, required, maxLength5, alphaSpaces} from '../ui'
 
 const UserDetails = props => {
 
-    const { user, pristine, reset, submitting, onSubmitUser, handleSubmit , onDeleteUser} = props
+    const { user, pristine, reset, submitting, onSubmitUser, handleSubmit, onDeleteUser } = props
+
     return (
         (user !== undefined) &&
         <div>
@@ -12,7 +13,7 @@ const UserDetails = props => {
             <hr className="mb-4"></hr>
             <form onSubmit={handleSubmit(onSubmitUser)}>
                 <div className="row">
-                    <Field name="firstName" component={renderField} validate={[required, alphaSpaces]} type="text" label="First Name" className="col-md-6 mb-3" />
+                    <Field name="firstName" component={renderField} validate={[required, maxLength5, alphaSpaces]} type="text" label="First Name" className="col-md-6 mb-3" />
                     <Field name="lastName" component={renderField} type="text" label="Last Name" className="col-md-6 mb-3" />
                 </div>
                 <Field name="userName" component={renderFieldWithPrefix} type="text" label="User Name" prefix="@" className="mb-3" />
@@ -31,5 +32,5 @@ const UserDetails = props => {
 
 export default reduxForm({
     form: 'userForm',
-    enableReinitialize: 'true'
+    enableReinitialize: 'false'
 })(UserDetails)
