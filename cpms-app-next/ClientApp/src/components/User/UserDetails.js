@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { renderField, renderFieldWithPrefix, required, maxLength5, alphaSpaces} from '../ui'
+import { renderField, renderFieldWithPrefix, required, maxLength30, maxLength50, alphaSpaces, alphaNumeric, minLength8} from '../ui'
 
 const UserDetails = props => {
 
@@ -13,12 +13,12 @@ const UserDetails = props => {
             <hr className="mb-4"></hr>
             <form onSubmit={handleSubmit(onSubmitUser)}>
                 <div className="row">
-                    <Field name="firstName" component={renderField} validate={[required, maxLength5, alphaSpaces]} type="text" label="First Name" className="col-md-6 mb-3" />
-                    <Field name="lastName" component={renderField} type="text" label="Last Name" className="col-md-6 mb-3" />
+                    <Field name="firstName" component={renderField} validate={[required, maxLength50, alphaSpaces]} type="text" label="First Name" className="col-md-6 mb-3" />
+                    <Field name="lastName" component={renderField} validate={[required, maxLength50, alphaSpaces]} type="text" label="Last Name" className="col-md-6 mb-3" />
                 </div>
-                <Field name="userName" component={renderFieldWithPrefix} type="text" label="User Name" prefix="@" className="mb-3" />
+                <Field name="userName" component={renderFieldWithPrefix} validate={[required, maxLength30, alphaNumeric]} type="text" label="User Name" prefix="@" className="mb-3" />
 
-                <Field name="password" component={renderField} type="password" label="Password" className="mb-3" />
+                <Field name="password" component={renderField} validate={[required, minLength8]} type="password" label="Password" className="mb-3" />
 
                 <div className="row  float-right">
                     <button className="btn btn-outline-primary" type="button" onClick={() => onDeleteUser(user)}>Delete</button>

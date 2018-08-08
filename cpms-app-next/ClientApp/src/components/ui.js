@@ -6,8 +6,8 @@ export const renderField = ({ input, label, type, className, maxLength, meta: { 
         <div>
             <input {...input} placeholder={label} type={type} className="form-control"/>
             {touched &&
-                ((error && <span>{error}</span>) ||
-                    (warning && <span>{warning}</span>))}
+                ((error && <small className="error text-danger">{error}</small>) ||
+                (warning && <small className="warning">{warning}</small>))}
         </div>
     </div>
 )
@@ -20,10 +20,10 @@ export const renderFieldWithPrefix = ({ input, label, type, prefix, className, m
                 <span className="input-group-text">{prefix}</span>
             </div>
             <input {...input} placeholder={label} type={type} className="form-control" />
-            {touched &&
-                ((error && <span>{error}</span>) ||
-                    (warning && <span>{warning}</span>))}
         </div>
+        {touched &&
+            ((error && <small className="error text-danger">{error}</small>) ||
+                (warning && <small className="warning">{warning}</small>))}
     </div>
 )
 
@@ -32,7 +32,7 @@ export const renderFieldWithPrefix = ({ input, label, type, prefix, className, m
 export const required = value => (value || typeof value === 'number' ? undefined : 'Required')
 export const number = value => value && isNaN(Number(value)) ? 'Must be a number' : undefined
 
-//Min Length
+//Min Value
 const minValue = min => value =>
     value && value < min ? `Must be at least ${min}` : undefined
 
@@ -41,7 +41,14 @@ const minValue = min => value =>
 const maxLength = max => value =>
     value && value.length > max ? `Must be ${max} characters or less` : undefined
 
-export const maxLength5 = maxLength(5)
+export const maxLength30 = maxLength(30)
+export const maxLength50 = maxLength(50)
+
+//Min Length
+const minLength = min => value =>
+    value && value.length < min ? `Must be ${min} characters or more` : undefined
+export const minLength8 = minLength(8)
+
 
 export const email = value =>
     value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
