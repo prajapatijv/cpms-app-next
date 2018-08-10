@@ -81,9 +81,12 @@ export const reducer = (state, action) => {
             };
         }
         case SELECT_USER: {
+            //console.log(state.users.find())
+            console.log(state.users.map(u => u.id === action.selectedUser.id))
             return {
                 ...state,
-                user: action.selectedUser
+                users: state.users,
+                user: action.selectedUser,
             };
         }
         case ADD_USER: {

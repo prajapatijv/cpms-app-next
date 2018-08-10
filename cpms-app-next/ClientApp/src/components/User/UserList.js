@@ -21,9 +21,10 @@ const UserList = ({ users, selectedUser, onSelectUser, onAddUser, onDeleteUser }
 }
 
 const ListUsers = ({ users, onSelectUser }) => {
+    //users.find(u => u.id == )
     return (
         users.map(user =>
-            <tr key={user.id} onClick={() => onSelectUser(user)} >
+            <tr key={user.id}  className="table-active" onClick={() => onSelectUser(user)} >
                 <td>{user.fullName} </td>
                 <td>{user.userName} </td>
             </tr>
