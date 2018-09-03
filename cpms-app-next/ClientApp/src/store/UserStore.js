@@ -81,11 +81,19 @@ export const reducer = (state, action) => {
             };
         }
         case SELECT_USER: {
-            //console.log(state.users.find())
-            console.log(state.users.map(u => u.id === action.selectedUser.id))
+            const newUsers = [ ...state.users ];
+            newUsers.map(item => {
+                if (item.id === action.selectedUser.id) {
+                    item.selected = true;
+                }
+                else {
+                    item.selected = false;
+                }
+            });
+
             return {
                 ...state,
-                users: state.users,
+                users: newUsers,
                 user: action.selectedUser,
             };
         }
