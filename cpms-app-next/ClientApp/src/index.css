@@ -29,3 +29,12 @@ button {
     color: #fff;
     text-decoration: none;
 }
+
+tr.table-active {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+tr.table-active td:last-child {
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+}
