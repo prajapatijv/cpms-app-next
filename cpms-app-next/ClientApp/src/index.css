@@ -38,3 +38,7 @@ tr.table-active td:last-child {
     border-bottom-right-radius: 25px;
     border-top-right-radius: 25px;
 }
+
+.progress .progress-bar {
+    width:100%;
+}

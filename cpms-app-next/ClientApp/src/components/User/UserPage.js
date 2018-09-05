@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { actionCreators } from '../../store/UserStore';
 import UserList from './UserList';
 import UserDetails from './UserDetails';
+import ProgressBar from '../ProgressBar'
 
 class UserPage extends Component {
     componentDidMount() {
@@ -21,14 +22,17 @@ class UserPage extends Component {
         const { user, onSubmitUser, onDeleteUser} = this.props;
 
         return (
-            <div className="row">
-                <div className="col-md-6 order-md-1">
-                    <UserList {...this.props} />
+            <div>
+                <ProgressBar />
+                <div className="row">
+                    <div className="col-md-6 order-md-1">
+                        <UserList {...this.props} />
+                    </div>
+                    <div className="col-md-6 order-md-1">
+                        <UserDetails user={user} initialValues={user} onSubmitUser={onSubmitUser} onDeleteUser={onDeleteUser} />
+                    </div>
                 </div>
-                <div className="col-md-6 order-md-1">
-                    <UserDetails user={user} initialValues={user} onSubmitUser={onSubmitUser} onDeleteUser={onDeleteUser} />
-                </div>
-            </div> 
+            </div>
         );
     }
 }
