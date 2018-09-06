@@ -6,7 +6,7 @@ const UserList = ({ users, selectedUser, onSelectUser, onAddUser, onDeleteUser }
             <h4 className="d-inline">Manage Users</h4>
             <hr className="mb-4"></hr>
             <button type="button" className="btn btn-outline-dark d-inline float-right" onClick={onAddUser}>+</button>
-            <div class="table-responsive">
+            <div className="table-responsive">
                 <table className="table table-hover">
                     <thead>
                         <tr>

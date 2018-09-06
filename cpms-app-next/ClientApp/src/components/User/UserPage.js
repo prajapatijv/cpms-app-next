@@ -20,10 +20,9 @@ class UserPage extends Component {
 
     render() {
         const { user, onSubmitUser, onDeleteUser} = this.props;
-
         return (
             <div>
-                <ProgressBar />
+                <ProgressBar {...this.props} />
                 <div className="row">
                     <div className="col-md-6 order-md-1">
                         <UserList {...this.props} />

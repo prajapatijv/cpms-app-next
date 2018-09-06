@@ -103,11 +103,19 @@ export const reducer = (state, action) => {
                 user: { id: 0, firstName: ''}
             };
         }
+        case SAVE_USER : {
+            return {
+                ...state,
+                users: action.users,
+                isSaving: true
+            };
+        }
         case SAVE_USER_SUCCESS:{
             return {
                 ...state,
                 users: action.users,
-                saved: true
+                user: undefined,
+                isSaving: false
             };
         }
         case DELETE_USER: {
