@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -9,6 +10,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import Button from '@material-ui/core/Button';
 
 export const mainListItems = (
     <div>
@@ -22,7 +24,7 @@ export const mainListItems = (
             <ListItemIcon>
                 <ShoppingCartIcon />
             </ListItemIcon>
-            <ListItemText primary="Orders" />
+            <ListItemText primary="Transactions" />
         </ListItem>
         <ListItem button>
             <ListItemIcon>
@@ -34,7 +36,7 @@ export const mainListItems = (
             <ListItemIcon>
                 <BarChartIcon />
             </ListItemIcon>
-            <ListItemText primary="Reports" />
+            <ListItemText primary="Items" />
         </ListItem>
         <ListItem button>
             <ListItemIcon>
@@ -47,18 +49,20 @@ export const mainListItems = (
 
 export const secondaryListItems = (
     <div>
-        <ListSubheader inset>Saved reports</ListSubheader>
+        <ListSubheader inset>Admin</ListSubheader>
         <ListItem button>
             <ListItemIcon>
-                <AssignmentIcon />
+                <PeopleIcon />
             </ListItemIcon>
-            <ListItemText primary="Current month" />
+            <Button component={Link} to="/users">
+                <ListItemText primary="Users" />
+            </Button>
         </ListItem>
         <ListItem button>
             <ListItemIcon>
                 <AssignmentIcon />
             </ListItemIcon>
-            <ListItemText primary="Last quarter" />
+            <ListItemText primary="Ledger Report" />
         </ListItem>
         <ListItem button>
             <ListItemIcon>

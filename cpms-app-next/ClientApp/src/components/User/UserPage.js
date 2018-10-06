@@ -2,9 +2,11 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../store/UserStore';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
 import UserList from './UserList';
 import UserDetails from './UserDetails';
-import ProgressBar from '../ProgressBar'
 
 class UserPage extends Component {
     componentDidMount() {
@@ -22,15 +24,10 @@ class UserPage extends Component {
         const { user, onSubmitUser, onDeleteUser} = this.props;
         return (
             <div>
-                <ProgressBar {...this.props} />
-                <div className="row">
-                    <div className="col-md-6 order-md-1">
+                <Grid container spacing={16}>
                         <UserList {...this.props} />
-                    </div>
-                    <div className="col-md-6 order-md-1">
                         <UserDetails user={user} initialValues={user} onSubmitUser={onSubmitUser} onDeleteUser={onDeleteUser} />
-                    </div>
-                </div>
+                </Grid>
             </div>
         );
     }
