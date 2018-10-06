@@ -1,69 +1,70 @@
 ﻿import React from 'react';
-import { NavLink } from 'react-router-dom';
-import './NavMenu.css';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PeopleIcon from '@material-ui/icons/People';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import LayersIcon from '@material-ui/icons/Layers';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
-//TODO: Move this to separate folder.
-const MenuData = [
-    {
-        title: "TRANSACTIONS",
-        navItems: [
-            { title: "Dashboard", routeTo: "/" },
-            { title: "Dispatch", routeTo: "/dispatch" },
-            { title: "Return", routeTo: "/return" },
-            { title: "Settlement", routeTo: "/settlement" },
-        ]
-    },
-    {
-        title: "MASTERS",
-        navItems: [
-            { title: "Customers", routeTo: "/customers" },
-            { title: "Items", routeTo: "/items" },
-            { title: "Users", routeTo: "/users" },
-        ]
-    },
-    {
-        title: "REPORTS",
-        navItems: [
-            { title: "Ledger", routeTo: "/ledger-report" },
-            { title: "Customers", routeTo: "/customers-report" },
-            { title: "Items", routeTo: "/items-report" },
-        ]
-    }];
-
-export default props => (
-<div>
-    <div className="sidebar-sticky">
-        <MenuItems navGroups={MenuData} />
+export const mainListItems = (
+    <div>
+        <ListItem button>
+            <ListItemIcon>
+                <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <ShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Orders" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Customers" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <BarChartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Reports" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <LayersIcon />
+            </ListItemIcon>
+            <ListItemText primary="Integrations" />
+        </ListItem>
     </div>
-</div>
 );
 
-function MenuItems(props) {
-    const listItems =
-        <div>
-            {props.navGroups.map((navGroup) =>
-                <div key={navGroup.title}>
-                    <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>{navGroup.title}</span>
-                    </h6>
-                    <NavItem key={navGroup.title + "_item"} navItems={navGroup.navItems} />
-                </div>
-            )}
-        </div>
-
-    return listItems;
-};
-
-function NavItem(props) {
-    const menuItem =
-        <ul className="nav flex-column">
-            {props.navItems.map(navItem =>
-                <li key={navItem.title} className="nav-item">
-                    <NavLink className="nav-link" to={navItem.routeTo} exact activeClassName="active">{navItem.title}</NavLink>
-                </li>
-            )}
-        </ul>
-
-    return menuItem;
-};
-
+export const secondaryListItems = (
+    <div>
+        <ListSubheader inset>Saved reports</ListSubheader>
+        <ListItem button>
+            <ListItemIcon>
+                <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="Current month" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="Last quarter" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="Year-end sale" />
+        </ListItem>
+    </div>
+);
