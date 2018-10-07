@@ -14,19 +14,14 @@ class UserPage extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        //if (prevProps.users !== this.props.users) {
-            // This method runs when incoming props (e.g., route params) change
-          //  this.props.loadUsers();
-        //}
     }
 
     render() {
-        const { user, onSubmitUser, onDeleteUser} = this.props;
+        //const { user, onSubmitUser, onDeleteUser} = this.props;
         return (
             <div>
                 <Grid container spacing={16}>
-                        <UserList {...this.props} />
-                        <UserDetails user={user} initialValues={user} onSubmitUser={onSubmitUser} onDeleteUser={onDeleteUser} />
+                    <UserList {...this.props} />
                 </Grid>
             </div>
         );
@@ -37,3 +32,6 @@ export default connect(
     state => state.users,
     dispatch => bindActionCreators(actionCreators, dispatch)
 )(UserPage);
+
+
+//<UserDetails user={user} initialValues={user} onSubmitUser={onSubmitUser} onDeleteUser={onDeleteUser} />

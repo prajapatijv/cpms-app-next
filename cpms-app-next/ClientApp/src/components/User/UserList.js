@@ -26,7 +26,7 @@ const UserList = ({ users, selectedUser, onSelectUser, onAddUser, onDeleteUser }
     //const { classes } = props;
 
     return (
-        <Table>
+        <Table aria-labelledby="tableTitle">
             <TableHead>
                 <TableRow>
                     <TableCell>Name</TableCell>
@@ -36,18 +36,18 @@ const UserList = ({ users, selectedUser, onSelectUser, onAddUser, onDeleteUser }
             <TableBody>
                 <ListUsers users={users} onSelectUser={onSelectUser} onDeleteUser={onDeleteUser} />
             </TableBody>
-                <Button variant="fab" color="primary" aria-label="Add" >
-                    <AddIcon />
-                </Button>
-            </Table>
-        
+            <Button variant="fab" color="primary" aria-label="Add" >
+                <AddIcon />
+            </Button>
+        </Table>
+
     );
 }
 
 const ListUsers = ({ users, onSelectUser }) => {
     return (
         users.map(user =>
-            <TableRow key={user.id}>
+            <TableRow hover key={user.id}>
                 <TableCell component="th" scope="row">
                     {user.fullName}
                 </TableCell>

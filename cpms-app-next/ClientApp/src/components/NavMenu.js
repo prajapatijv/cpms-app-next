@@ -68,7 +68,7 @@ export const secondaryListItems = (
             <ListItemIcon>
                 <AssignmentIcon />
             </ListItemIcon>
-            <ListItemText primary="Year-end sale" />
+            <ListItemText primary="Settings" />
         </ListItem>
     </div>
 );
