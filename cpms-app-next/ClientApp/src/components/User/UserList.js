@@ -20,6 +20,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Icon from '@material-ui/core/Icon';
+import NavLink from 'react-router-dom/NavLink';
 
 
 const UserList = ({ users, selectedUser, onSelectUser, onAddUser, onDeleteUser }) => {
@@ -31,6 +32,7 @@ const UserList = ({ users, selectedUser, onSelectUser, onAddUser, onDeleteUser }
                 <TableRow>
                     <TableCell>Name</TableCell>
                     <TableCell>UserID</TableCell>
+                    <TableCell>Action</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -52,6 +54,7 @@ const ListUsers = ({ users, onSelectUser }) => {
                     {user.fullName}
                 </TableCell>
                 <TableCell>{user.userName}</TableCell>
+                <TableCell><NavLink to={`/users/${user.id}`} activeClassName="active">Edit</NavLink></TableCell>
             </TableRow>
         )
     );

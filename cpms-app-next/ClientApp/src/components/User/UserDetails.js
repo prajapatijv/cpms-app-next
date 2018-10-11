@@ -12,7 +12,7 @@ class UserDetails extends Component {
 
     render() {
         const { user, pristine, reset, submitting, onSubmitUser, handleSubmit, onDeleteUser } = this.props;
-
+        
         return (
             (user !== undefined) &&
             <div>
@@ -38,6 +38,11 @@ class UserDetails extends Component {
     }
 }
 
-export default reduxForm (
-    name:'userForm'
+UserDetails = connect(
+    state => state.user,
+    dispatch => bindActionCreators(actionCreators, dispatch)
 )(UserDetails);
+
+export default reduxForm ({
+    name:'userForm'
+})(UserDetails);
